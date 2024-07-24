@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Menagement system by ATIKA QASIM</title>
+    <style>
+         * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .allbooks,
+        .addbooks {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        td {
+            border: 2px solid black;
+            font-weight: 400;
+            background-color: #ffffff5c;
+        }
+        table,
+        th {
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 8px 25px;
+            background-color: #ffffff5c;
+            font-weight: 700;
+        }
+
+        .heading {
+            background-color: #f5d5d5ad;
+            margin: 20px;
+            padding: 12px 38px;
+            border: 3px solid black;
+            text-decoration: underline;
+            border-radius: 15%;
+        }
+
+        body {
+            background-image: url('/image');
+            font-family: Georgia, 'Times New Roman', Times, serif, Arial, Helvetica, sans-serif;
+        }
+
+        form input {
+            padding: 8px 3px;
+            margin: 2px;
+            background-color: #ffffff8a;
+        }
+
+        ::placeholder {
+            color: black;
+            font-weight: 300;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bgimg">
+        <div class="allbooks">
+            <div class="heading">
+                <h1>All Books</h1>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Book Name</th>
+                        <th>Book Author</th>
+                        <th>Book Pages</th>
+                        <th>Book Price</th>
+                        <th>Book State</th>
+                        <th>Issue</th>
+                        <th>Return</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% book.forEach((books,index)=>{%>
+                        <tr>
+                            <th scope="row">
+                                <%=index +1%>
+                            </th>
+                            <td>
+                                <%= books.bookName %>
+                            </td>
+                            <td>
+                                <%= books.bookAuthor %>
+                            </td>
+                            <td>
+                                <%= books.bookPages %>
+                            </td>
+                            <td>
+                                <%= books.bookPrice %>
+                            </td>
+                            <td>
+                                <%= books.bookState %>
+                            </td>
+                            <td>
+                                <form action="/issue" method="POST">
+                                    <input type="text" style="display: none;" name="bookName"
+                                        value="<%= books.bookName %>">
+                                    <button type="submit">Issue</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/return" method="POST">
+                                    <input type="text" style="display: none;" name="bookName"
+                                        value="<%= books.bookName %>">
+                                    <button type="submit">Return</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/delete" method="POST">
+                                    <input type="text" style="display: none;" name="bookName"
+                                        value="<%= books.bookName %>">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%});%>
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="addbooks">
+            <div class="heading">
+                <h1>Add Books</h1>
+            </div>
+            <form action="/addbooks" method="POST">
+                <input type="text" name="bookName" id="bookName" placeholder="Book Name">
+                <input type="text" name="bookAuthor" id="bookAuthor" placeholder="Book Author">
+                <input type="text" name="bookPages" id="bookPages" placeholder="Book Pages">
+                <input type="text" name="bookPrice" id="bookPrice" placeholder="Book Price">
+                <input type="text" name="bookState" id="bookstate" placeholder="Book State">
+                <br>
+                <input type="submit" value="Add Book">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
